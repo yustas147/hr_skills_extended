@@ -1,1 +1,1 @@
-from . import *
+from . import hr_skill_inherited
