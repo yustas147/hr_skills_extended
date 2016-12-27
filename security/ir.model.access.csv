@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_hr_skills_extended_hr_skills_extended,hr_skills_extended.hr_skills_extended,model_hr_skills_extended_hr_skills_extended,,1,0,0,0
