@@ -1,22 +1,31 @@
+<?xml version="1.0"?>
 <openerp>
     <data>
-        <!-- <template id="listing"> -->
-        <!--   <ul> -->
-        <!--     <li t-foreach="objects" t-as="object"> -->
-        <!--       <a t-attf-href="#{ root }/objects/#{ object.id }"> -->
-        <!--         <t t-esc="object.display_name"/> -->
-        <!--       </a> -->
-        <!--     </li> -->
-        <!--   </ul> -->
-        <!-- </template> -->
-        <!-- <template id="object"> -->
-        <!--   <h1><t t-esc="object.display_name"/></h1> -->
-        <!--   <dl> -->
-        <!--     <t t-foreach="object._fields" t-as="field"> -->
-        <!--       <dt><t t-esc="field"/></dt> -->
-        <!--       <dd><t t-esc="object[field]"/></dd> -->
-        <!--     </t> -->
-        <!--   </dl> -->
-        <!-- </template> -->
+        <record model="ir.ui.view" id="hr_skill_extended_inherits_view_skill_form">
+            <field name="name">hr.skill.extended.inherits.view.skill.form</field>
+            <field name="model">hr.skill</field>
+            <field name="inherit_id" ref="hr_skill.view_skill_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='active']" position="after">
+                    <field name='description'/>
+                </xpath>
+            </field>
+        </record>
+        <record id="hr_skills_extended_inherits_view_employee_skill_form" model="ir.ui.view">
+        <field name="name">hr.skills.extended.inherits.view.empoloyee.skill.form</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr_skill.view_employee_skill_form"/>
+        <field name="arch" type="xml">
+            <field name="skill_ids" position="after">
+                <field name='hr_employee_skill_data_ids'/>
+            </field>
+            <!--<notebook position="inside">-->
+                <!--<page string="Skills">-->
+                    <!--<field name="skill_ids" />-->
+                <!--</page>-->
+            <!--</notebook>-->
+        </field>
+    </record>
+
     </data>
 </openerp>

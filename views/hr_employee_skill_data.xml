@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="hr_employee_skill_data_tree">
+            <field name="name">hr.employee.skill.data.tree</field>
+            <field name="model">hr.employee.skill.data</field>
+            <field name="arch" type="xml">
+                <tree>
+                        <field name="skill_id"/>
+                        <field name="percentage"/>
+                        <field name="description"/>
+                </tree>
+                <!--<xpath expr="//field[@name='active']" position="after">-->
+                    <!--<field name='description'/>-->
+                <!--</xpath>-->
+            </field>
+        </record>        
+        <record id="sync_skills_act" model="ir.actions.server">
+               <field name="name">Sync skills for employee.</field>
+               <field name="model_id" ref="model_hr_employee_skill_data"/>
+               <field name="state">code</field>
+               <field name="code">self.sync_skills(cr,uid,context=context)</field>
+        </record>
+        <record id="sync_emp_skill_data" model="base.action.rule">
+            <field name="name">Trigger sync of skills between models.</field>
+            <field name="model_id" ref="model_hr_employee_skill_data"/>
+            <field name="active">True</field>
+            <field name="kind">on_create</field>
+            <field name="server_action_ids" eval="[(6,0,[ref('sync_skills_act')])]" />
+        </record>
+        
+        
+
+    </data>
+</openerp>

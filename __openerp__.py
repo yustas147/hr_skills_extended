@@ -4,7 +4,7 @@
 
     'summary': """
         Adds 2 fields to hr_skills.hr_skill model
-"""
+""",
 
     'description': """
         Adds 2 fields to hr_skills.hr_skill model: Percentage and Description
@@ -20,13 +20,14 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base','hr_skills'],
+    'depends': ['base','hr_skill'],
 
     # always loaded
     'data': [
         # 'security/ir.model.access.csv',
      #   'templates.xml',
         'views/inherited_hr_skill_views.xml',
+        'views/hr_employee_skill_data.xml',
     ],
     # only loaded in demonstration mode
     'demo': [
