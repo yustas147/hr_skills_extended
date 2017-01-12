@@ -18,8 +18,10 @@
         <record id="sync_skills_act" model="ir.actions.server">
                <field name="name">Sync skills for employee.</field>
                <field name="model_id" ref="model_hr_employee_skill_data"/>
-               <field name="state">code</field>
-               <field name="code">self.sync_skills(cr,uid,context=context)</field>
+               <!--<field name="state">code</field>-->
+               <field name="code">
+                    self.sync_skills(cr,uid,object)
+               </field>
         </record>
         <record id="sync_emp_skill_data" model="base.action.rule">
             <field name="name">Trigger sync of skills between models.</field>
@@ -33,3 +35,5 @@
 
     </data>
 </openerp>
+
+                    <!--emp = object.employee_id; emp.update({"skill_ids":[(4,object.skill_id.id)]})-->
