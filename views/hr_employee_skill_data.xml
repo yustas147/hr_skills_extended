@@ -5,7 +5,7 @@
             <field name="name">hr.employee.skill.data.tree</field>
             <field name="model">hr.employee.skill.data</field>
             <field name="arch" type="xml">
-                <tree>
+                <tree editable="bottom">
                         <field name="skill_id"/>
                         <field name="percentage"/>
                         <field name="description"/>
