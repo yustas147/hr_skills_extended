@@ -8,7 +8,7 @@
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='active']" position="after">
                     <field name='hr_employee_skill_data_ids'>
-                        <tree>
+                        <tree editable="bottom">
                             <field name="employee_id"/>
                             <field name="percentage"/>
                             <field name="description"/>
