@@ -18,7 +18,6 @@
         <record id="sync_skills_act" model="ir.actions.server">
                <field name="name">Sync skills for employee.</field>
                <field name="model_id" ref="model_hr_employee_skill_data"/>
-               <!--<field name="state">code</field>-->
                <field name="code">
                     self.sync_skills(cr,uid,object)
                </field>
@@ -27,9 +26,24 @@
             <field name="name">Trigger sync of skills between models.</field>
             <field name="model_id" ref="model_hr_employee_skill_data"/>
             <field name="active">True</field>
-            <field name="kind">on_create</field>
+            <field name="kind">on_create_or_write</field>
             <field name="server_action_ids" eval="[(6,0,[ref('sync_skills_act')])]" />
         </record>
+        <record id="sync_skills_act_2" model="ir.actions.server">
+               <field name="name">Sync skills for employee.</field>
+               <field name="model_id" ref="model_hr_employee"/>
+               <field name="code">
+                    self.sync_skills_2(cr,uid,object)
+               </field>
+        </record>
+        <record id="sync_emp_skill_data_2" model="base.action.rule">
+            <field name="name">on change employee sync skills.</field>
+            <field name="model_id" ref="model_hr_employee"/>
+            <field name="active">True</field>
+            <field name="kind">on_create_or_write</field>
+            <field name="server_action_ids" eval="[(6,0,[ref('sync_skills_act_2')])]" />
+        </record>
+        
         
         
 

@@ -7,7 +7,14 @@
             <field name="inherit_id" ref="hr_skill.view_skill_form"/>
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='active']" position="after">
-                    <field name='description'/>
+                    <field name='hr_employee_skill_data_ids'>
+                        <tree>
+                            <field name="employee_id"/>
+                            <field name="percentage"/>
+                            <field name="description"/>
+                        </tree>
+                    </field>
+                    <!--<field name='description'/>-->
                 </xpath>
             </field>
         </record>
@@ -18,6 +25,9 @@
         <field name="arch" type="xml">
             <field name="skill_ids" position="after">
                 <field name='hr_employee_skill_data_ids'/>
+            </field>
+            <field name="skill_ids" position="attributes">
+                <attribute name='readonly'>True</attribute>
             </field>
             <!--<notebook position="inside">-->
                 <!--<page string="Skills">-->
