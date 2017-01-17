@@ -24,7 +24,7 @@
 
     # always loaded
     'data': [
-        # 'security/ir.model.access.csv',
+        'security/ir.model.access.csv',
      #   'templates.xml',
         'views/inherited_hr_skill_views.xml',
         'views/hr_employee_skill_data.xml',
