@@ -20,7 +20,7 @@ class hr_employee_skill_data(models.Model):
         emp = obj.employee_id
 #        emp.update({"skill_ids":[(4,obj.skill_id.id)]})
         sk_ids = emp.hr_employee_skill_data_ids.mapped('skill_id').mapped('id')
-        _logger.info('sk_ids is %s' % (sk_ids)) 
+        _logger.info('from sync_skills: sk_ids is %s' % (sk_ids)) 
         emp.update({"skill_ids":[(6,0,sk_ids)]})
         
         
@@ -47,6 +47,23 @@ class hr_employee(models.Model):
         emp = obj
 #        emp.update({"skill_ids":[(4,obj.skill_id.id)]})
         sk_ids = emp.hr_employee_skill_data_ids.mapped('skill_id').mapped('id')
+        sk_child_ids = emp.hr_employee_skill_data_ids.mapped('skill_id').mapped('child_ids').mapped('id')
+        sk_ids = sk_ids + sk_child_ids
+        sk_ids = set(sk_ids)
+        
         _logger.info('sk_ids is %s' % (sk_ids)) 
-        emp.update({"skill_ids":[(6,0,sk_ids)]})
+        
+        datas=[]
+        _logger.info('hr_employee_skill_data_ids is %s' % (emp.hr_employee_skill_data_ids)) 
+        _logger.info('hr_employee_skill_data_ids.mapped is %s' % (emp.hr_employee_skill_data_ids.mapped('skill_id').mapped('id'))) 
+        for skid in [sk for sk in sk_ids if sk not in emp.hr_employee_skill_data_ids.mapped('skill_id').mapped('id')]:
+#        for skid in sk_ids:
+            datas.append((0,0,{'skill_id':skid, 'employee_id':emp.id}))
+#            emp.update({"hr_employee_skill_data_ids":[(0,0,{'skill_id':skid, 'employee_id':emp.id})]})
+    
+        _logger.info('datas is %s' % (datas)) 
+        emp.update({"skill_ids":[(6,0,sk_ids)], "hr_employee_skill_data_ids":datas})
+#        emp.update({"skill_ids":[(6,0,sk_ids)]})
+        #self.env['hr.employee.skill.data'].create(datas)
+        
     

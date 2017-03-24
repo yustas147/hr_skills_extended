@@ -26,14 +26,9 @@
             <field name="skill_ids" position="after">
                 <field name='hr_employee_skill_data_ids'/>
             </field>
-            <field name="skill_ids" position="attributes">
-                <attribute name='readonly'>True</attribute>
-            </field>
-            <!--<notebook position="inside">-->
-                <!--<page string="Skills">-->
-                    <!--<field name="skill_ids" />-->
-                <!--</page>-->
-            <!--</notebook>-->
+            <!--<field name="skill_ids" position="attributes">-->
+                <!--<attribute name='readonly'>True</attribute>-->
+            <!--</field>-->
         </field>
     </record>
 

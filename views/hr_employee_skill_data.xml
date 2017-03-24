@@ -6,6 +6,7 @@
             <field name="model">hr.employee.skill.data</field>
             <field name="arch" type="xml">
                 <tree editable="bottom">
+                        <field name="employee_id"/>
                         <field name="skill_id"/>
                         <field name="percentage"/>
                         <field name="description"/>
@@ -15,6 +16,18 @@
                 <!--</xpath>-->
             </field>
         </record>        
+        <record model="ir.ui.view" id="hr_employee_skill_data_form">
+            <field name="name">hr.employee.skill.data.form</field>
+            <field name="model">hr.employee.skill.data</field>
+            <field name="arch" type="xml">
+                <form string="Employee Skill Data">
+                        <field name="employee_id"/>
+                        <field name="skill_id"/>
+                        <field name="percentage"/>
+                        <field name="description"/>
+                </form>
+            </field>
+        </record>   
         <record id="sync_skills_act" model="ir.actions.server">
                <field name="name">Sync skills for employee.</field>
                <field name="model_id" ref="model_hr_employee_skill_data"/>
@@ -44,7 +57,19 @@
             <field name="server_action_ids" eval="[(6,0,[ref('sync_skills_act_2')])]" />
         </record>
         
-        
+        <record id="hr_employee_skill_data_act" model="ir.actions.act_window">
+        <field name="name">Employee Skill Data</field>
+        <field name="res_model">hr.employee.skill.data</field>
+        <field name="view_type">form</field>
+        <field name="view_id" ref="hr_employee_skill_data_form"/>
+    </record>
+    <menuitem
+        id="menu_hr_employee_skill_data_act"
+        name="Employee Skill Data"
+        parent="hr_skill.menu_hr_skill_mgt"
+        action="hr_employee_skill_data_act"
+        sequence="100" 
+    />
         
 
     </data>
