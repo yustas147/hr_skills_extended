@@ -45,8 +45,31 @@ class hr_employee(models.Model):
     def sync_skills_2(self,obj):
         _logger.info('self is %s' % (unicode(self)))
         emp = obj
+        sk_ids = []
+        for esdi in emp.hr_employee_skill_data_ids:
+            sk_ids.append(esdi.skill_id.id) 
+            sk_ids += esdi.skill_id.get_all_children_ids()
+            
+        sk_ids = set(sk_ids)
+        
+        _logger.info('sk_ids is %s' % (sk_ids)) 
+        
+        datas=[]
+#        for skid in sk_ids:
+        for skid in [sk for sk in sk_ids if sk not in emp.hr_employee_skill_data_ids.mapped('skill_id').mapped('id')]:
+            datas.append((0,0,{'skill_id':skid, 'employee_id':emp.id}))
+        _logger.info('datas is %s' % (datas)) 
+        emp.update({"skill_ids":[(6,0,sk_ids)], "hr_employee_skill_data_ids":datas})
+    
+    
+    
+    @api.model
+    def sync_skills_2_(self,obj):
+        _logger.info('self is %s' % (unicode(self)))
+        emp = obj
 #        emp.update({"skill_ids":[(4,obj.skill_id.id)]})
         sk_ids = emp.hr_employee_skill_data_ids.mapped('skill_id').mapped('id')
+#        sk_ids = emp.hr_employee_skill_data_ids.mapped('skill_id').mapped('id')
         sk_child_ids = emp.hr_employee_skill_data_ids.mapped('skill_id').mapped('child_ids').mapped('id')
         sk_ids = sk_ids + sk_child_ids
         sk_ids = set(sk_ids)
@@ -57,9 +80,7 @@ class hr_employee(models.Model):
         _logger.info('hr_employee_skill_data_ids is %s' % (emp.hr_employee_skill_data_ids)) 
         _logger.info('hr_employee_skill_data_ids.mapped is %s' % (emp.hr_employee_skill_data_ids.mapped('skill_id').mapped('id'))) 
         for skid in [sk for sk in sk_ids if sk not in emp.hr_employee_skill_data_ids.mapped('skill_id').mapped('id')]:
-#        for skid in sk_ids:
             datas.append((0,0,{'skill_id':skid, 'employee_id':emp.id}))
-#            emp.update({"hr_employee_skill_data_ids":[(0,0,{'skill_id':skid, 'employee_id':emp.id})]})
     
         _logger.info('datas is %s' % (datas)) 
         emp.update({"skill_ids":[(6,0,sk_ids)], "hr_employee_skill_data_ids":datas})

@@ -14,6 +14,7 @@
                             <field name="description"/>
                         </tree>
                     </field>
+                    <button name="get_all_children_ids" type="object" />
                     <!--<field name='description'/>-->
                 </xpath>
             </field>
