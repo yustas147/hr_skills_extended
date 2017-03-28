@@ -14,8 +14,16 @@
                             <field name="description"/>
                         </tree>
                     </field>
-                    <button name="get_all_children_ids" type="object" />
+                    <!--<button name="get_all_children_ids" type="object" />-->
                     <!--<field name='description'/>-->
+                </xpath>
+                <xpath expr="//field[@name='child_ids']" position='before'>
+                    <div>
+                        <h4>Child Skills</h4>
+                    </div>
+                </xpath>
+                <xpath expr="//field[@name='parent_id']" position='attributes'>
+                    <attribute name='string'>Parent Skill</attribute>
                 </xpath>
             </field>
         </record>
@@ -25,8 +33,16 @@
         <field name="inherit_id" ref="hr_skill.view_employee_skill_form"/>
         <field name="arch" type="xml">
             <field name="skill_ids" position="after">
-                <field name='hr_employee_skill_data_ids'/>
+                <field name='hr_employee_skill_data_ids'>
+                    <tree editable="bottom" default_order="percentage desc">
+                        <field name='skill_id'/>
+                        <field name='percentage'/>
+                        <field name='description'/>
+                    </tree>
+                </field>
             </field>
+            <field name="skill_ids" position="replace"/>
+            
             <!--<field name="skill_ids" position="attributes">-->
                 <!--<attribute name='readonly'>True</attribute>-->
             <!--</field>-->

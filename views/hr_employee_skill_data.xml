@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <openerp>
     <data>
-        <record model="ir.ui.view" id="hr_employee_skill_data_tree">
+        <record model="ir.ui.view" id="hr_employee_skill_data_tree_1">
             <field name="name">hr.employee.skill.data.tree</field>
             <field name="model">hr.employee.skill.data</field>
             <field name="arch" type="xml">
@@ -11,20 +11,21 @@
                         <field name="percentage"/>
                         <field name="description"/>
                 </tree>
-                <!--<xpath expr="//field[@name='active']" position="after">-->
-                    <!--<field name='description'/>-->
-                <!--</xpath>-->
             </field>
         </record>        
-        <record model="ir.ui.view" id="hr_employee_skill_data_form">
+        <record model="ir.ui.view" id="hr_employee_skill_data_form_1">
             <field name="name">hr.employee.skill.data.form</field>
             <field name="model">hr.employee.skill.data</field>
             <field name="arch" type="xml">
                 <form string="Employee Skill Data">
+                    <sheet>
+                     <group>
                         <field name="employee_id"/>
                         <field name="skill_id"/>
                         <field name="percentage"/>
                         <field name="description"/>
+                     </group>
+                    </sheet>
                 </form>
             </field>
         </record>   
@@ -57,11 +58,12 @@
             <field name="server_action_ids" eval="[(6,0,[ref('sync_skills_act_2')])]" />
         </record>
         
-        <record id="hr_employee_skill_data_act" model="ir.actions.act_window">
+    <record id="hr_employee_skill_data_act" model="ir.actions.act_window">
         <field name="name">Employee Skill Data</field>
         <field name="res_model">hr.employee.skill.data</field>
         <field name="view_type">form</field>
-        <field name="view_id" ref="hr_employee_skill_data_form"/>
+        <field name="view_mode">tree,form</field>
+        <!--<field name="view_id" ref="hr_employee_skill_data_form"/>-->
     </record>
     <menuitem
         id="menu_hr_employee_skill_data_act"

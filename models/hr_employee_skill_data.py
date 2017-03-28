@@ -12,7 +12,7 @@ class hr_employee_skill_data(models.Model):
     percentage = fields.Integer(string='Grade of owning')
     description = fields.Text(string='Full skill owning employee description')    
     employee_id = fields.Many2one(comodel_name='hr.employee', string=None)
-    skill_id = fields.Many2one(comodel_name='hr.skill', string=None)
+    skill_id = fields.Many2one(comodel_name='hr.skill', string=None, ondelete='cascade')
     
     @api.model
     def sync_skills(self,obj):
